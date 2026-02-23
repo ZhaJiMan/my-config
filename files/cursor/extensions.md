@@ -1,0 +1,14 @@
+- CodeSnap
+- Color Highlight
+- Even Better TOML
+- Jupyter
+- Live Server
+- Markdown All in One
+- Markdown Preview Enhanced
+- Material Icon Theme
+- Noctis
+- Path Intellisense
+- Python
+- Rainbow CSV
+- Remote - SSH
+- YAML

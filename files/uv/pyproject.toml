@@ -1,0 +1,59 @@
+[project]
+name = "base"
+version = "0.1.0"
+description = "base environment"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "numpy",
+    "scipy",
+    "pandas",
+    "xarray",
+    "openpyxl",
+    "pyarrow",
+    "netCDF4",
+    "Bottleneck",
+    "geopandas",
+    "matplotlib",
+    "seaborn",
+    "cartopy",
+    "cmaps",
+    "metpy",
+    "arrow",
+    "opencv-python",
+    "scikit-learn",
+    "scikit-image",
+    "oss2",
+    "alibabacloud-oss-v2",
+    "beautifulsoup4",
+    "loguru",
+    "radarutil",
+    "cidar",
+    "h5py",
+    "cfgrib",
+    "python-dotenv",
+    "bitarray",
+    "retrying",
+    "frykit[data]",
+    "altair[all]",
+    "ipykernel",
+]
+
+[dependency-groups]
+dev = [
+    "typos",
+    "line-profiler",
+    "snakeviz",
+    "build",
+    "twine",
+    "ruff",
+    "setuptools",
+]
+
+[[tool.uv.index]]
+url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple/"
+default = true
+
+[tool.uv.sources]
+radarutil = { path = "D:/code/github/ZhaJiMan/radarutil", editable = true }
+cidar = { path = "D:/code/github/ZhaJiMan/cidar", editable = true }

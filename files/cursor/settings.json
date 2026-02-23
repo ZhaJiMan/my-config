@@ -1,0 +1,22 @@
+{
+    "window.commandCenter": true,
+    "workbench.editor.enablePreview": false,
+    "workbench.colorTheme": "Noctis Hibernus",
+    "workbench.activityBar.orientation": "vertical",
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "workbench.iconTheme": "material-icon-theme",
+    "editor.rulers": [88],
+    "editor.minimap.enabled": true,
+    "jupyter.askForKernelRestart": false,
+    "cursorpyright.analysis.typeCheckingMode": "standard",
+    "git.openRepositoryInParentFolders": "never",
+    "remote.SSH.remotePlatform": {
+        "sh-develop-dev": "linux",
+        "sh-dev": "linux"
+    },
+    "remote.autoForwardPortsSource": "hybrid",
+    "redhat.telemetry.enabled": false,
+    "update.enableWindowsBackgroundUpdates": false,
+    "update.mode": "none"
+}

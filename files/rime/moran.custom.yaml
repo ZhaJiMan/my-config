@@ -1,0 +1,12 @@
+patch:
+  menu/page_size: 6
+  switches/@0/reset: 1  # 貌似跟中英文状态有关
+  moran/charset: simp
+  ascii_composer/switch_key:  # 好像没什么用
+    Shift_L: commit_code
+    Shift_R: commit_code
+  punctuator/half_shape:  # 去掉多余的候选菜单
+    '@': '@'
+    '#': '#'
+    '<': '《 '
+    '>': '》'

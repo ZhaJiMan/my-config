@@ -1,0 +1,51 @@
+(defcfg
+  process-unmapped-keys yes
+  log-layer-changes yes
+)
+
+(defvar
+  tap-repress-timeout 200
+  hold-timeout 200
+)
+
+(defalias
+  space-fn (tap-hold-press $tap-repress-timeout $hold-timeout spc (layer-while-held layer1))
+  new-line (macro end 5 ret)
+  del-line (macro home 5 home 5 S-end 5 del 5 del)
+)
+
+(defsrc
+  spc
+  e s d f
+  1 2 3 4 5 6 7 8 9 0 - =
+  y u i o
+  h j k l
+  n m , .
+  caps tab bspc
+  q w t c v
+  a z
+)
+
+(deflayer layer0
+  @space-fn
+  e s d f
+  1 2 3 4 5 6 7 8 9 0 - =
+  y u i o
+  h j k l
+  n m , .
+  lctl tab bspc
+  q w t c v
+  a z
+)
+
+(deflayer layer1
+  XX
+  up left down right
+  f1 f2 f3 f4 f5 f6 f7 f8 f9 f10 f11 f12
+  @del-line C-bspc C-del @new-line
+  home C-left C-right end
+  C-end pgdn pgup C-home
+  _ caps del
+  A-f4 M-d C-S-esc C-ins S-ins
+  volu vold
+)

@@ -1,0 +1,5 @@
+[default]
+accessKeyId=pass
+accessKeySecret=pass
+region=cn-shanghai
+endpoint=oss-cn-shanghai.aliyuncs.com
