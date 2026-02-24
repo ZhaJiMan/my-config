@@ -1,0 +1,143 @@
+vim9script
+
+# 插件
+call plug#begin()
+Plug 'vim-airline/vim-airline'
+Plug 'bluz71/vim-moonfly-colors', { 'as': 'moonfly' }
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+call plug#end()
+
+# 空格作为 leader 键
+nnoremap <Space> <Nop>
+g:mapleader = " "
+
+# 重载 vimrc
+nnoremap <Leader>r :source $MYVIMRC<CR>
+
+&number = true  # 显示行号
+&cursorline = true  # 显示行光标
+&wrap = false  # 禁用折行
+&scrolloff = 10  # 光标距窗口上下边缘的最小行数
+&ruler = true  # 状态栏显示光标位置
+&colorcolumn = "88"  # 高亮某一列
+&showmatch = true  # 光标会短暂跳到匹配的括号处
+
+# 光标形状
+&ttimeoutlen = 10
+&t_EI = "\033[2 q"  # NORMAL  █
+&t_SI = "\033[6 q"  # INSERT  |
+
+&smarttab = true  # 在行首根据 shiftwidth 插入 tab
+&expandtab = true  # 将 tab 转换成空格
+&autoindent = true  # 换行时继承上一行的缩进
+&shiftround = true  # 左移右移取整到 shiftwidth 的倍数上
+&tabstop = 4  # tab 的视觉宽度
+&shiftwidth = 4  # 左移右移的宽度
+&softtabstop = 4  # 虚拟 tab 的宽度
+
+# 正常的退格
+&backspace = "indent,eol,start"
+
+# 检测文件类型，加载对应插件和缩进规则
+filetype plugin indent on
+
+&hlsearch = true  # 高亮搜索
+&incsearch = true  # 增量搜索，不用按回车光标就能自动跳转
+&ignorecase = true  # 搜索时忽略大小写
+&smartcase = true  # 搜索时如果包含大写字母则区分大小写
+nnoremap <Leader>/ :nohlsearch<CR>
+
+syntax on  # 语法高亮
+&termguicolors = true  # 启用真彩色
+silent! colorscheme moonfly  # 配色主题
+
+# 右下角显示正在输入的命令
+&showcmd = true
+
+# 命令可以用 tab 补全
+&wildmenu = true
+&wildmode = "list:longest,full"
+
+# 行尾显示常用的不可见字符
+&list = true
+&listchars = "tab:>·,trail:·,extends:>,precedes:<,nbsp:+"
+
+# 文件编码
+&encoding = "utf-8"
+&fileencodings = "ucs-bom,utf-8,gbk,gb18030,big5,utf-16,latin1"
+
+# 自动处理不同系统的换行符
+&fileformats = "unix,dos,mac"
+
+&hidden = true  # 允许隐藏未保存的 buffer
+&confirm = true  # 没有保存或文件只读时弹出确认
+&autoread = true  # 文件被其它程序修改时自动读入
+
+# 切换 buffer
+nnoremap <Leader>, :bprevious<CR>
+nnoremap <Leader>. :bnext<CR>
+
+# 历史记录条数
+&history = 1000
+&undolevels = 1000
+
+# 如果目录不存在则创建
+def EnsureDir(path: string): string
+  if !isdirectory(path)
+    mkdir(path, "p")
+  endif
+  return path
+enddef
+
+# 持久化撤销
+&undofile = true
+&undodir = EnsureDir($HOME .. "/.vim/undo")
+
+# 禁用自动备份
+&backup = false
+&writebackup = false
+&swapfile = false
+
+# 恢复上次打开时的光标位置
+def RestoreCursor()
+  if line("'\"") > 1 && line("'\"") <= line("$")
+    exe "normal! g'\""
+  endif
+enddef
+
+# TODO: TrimeWhiteSpaces
+
+augroup vimrc
+  autocmd!
+  autocmd BufReadPost * RestoreCursor()
+augroup END
+
+# fzf
+nnoremap <Leader>f :Files<CR>
+nnoremap <Leader>b :Buffers<CR>
+
+# 分屏
+&splitright = true
+&splitbelow = true
+
+nnoremap <Leader>s <C-w>s
+nnoremap <Leader>v <C-w>v
+
+nnoremap <Leader>h <C-w>h
+nnoremap <Leader>l <C-w>l
+nnoremap <Leader>j <C-w>j
+nnoremap <Leader>k <C-w>k
+
+nnoremap <Leader>H <C-w>H
+nnoremap <Leader>L <C-w>L
+nnoremap <Leader>J <C-w>J
+nnoremap <Leader>K <C-w>K
+
+# netrw
+g:netrw_liststyle = 3
+nnoremap <Leader>e :Lex 35<CR>
+
+# TODO: LSP
