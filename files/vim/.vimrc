@@ -115,6 +115,12 @@ augroup vimrc
   autocmd BufReadPost * RestoreCursor()
 augroup END
 
+nnoremap <Leader>q :q<CR>
+nnoremap <Leader>Q :q!<CR>
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>x :x<CR>
+nnoremap <Leader>d :bdelete<CR>
+
 # fzf
 nnoremap <Leader>f :Files<CR>
 nnoremap <Leader>b :Buffers<CR>
