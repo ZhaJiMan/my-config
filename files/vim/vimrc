@@ -1,18 +1,20 @@
 vim9script
 
 # 插件
-call plug#begin()
+plug#begin()
+
 Plug 'vim-airline/vim-airline'
 Plug 'bluz71/vim-moonfly-colors', { 'as': 'moonfly' }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-call plug#end()
+
+plug#end()
 
 # 空格作为 leader 键
 nnoremap <Space> <Nop>
-g:mapleader = " "
+g:mapleader = ' '
 
 # 重载 vimrc
 nnoremap <Leader>r :source $MYVIMRC<CR>
@@ -25,11 +27,6 @@ nnoremap <Leader>r :source $MYVIMRC<CR>
 &colorcolumn = "88"  # 高亮某一列
 &showmatch = true  # 光标会短暂跳到匹配的括号处
 
-# 光标形状
-&ttimeoutlen = 10
-&t_EI = "\033[2 q"  # NORMAL  █
-&t_SI = "\033[6 q"  # INSERT  |
-
 &smarttab = true  # 在行首根据 shiftwidth 插入 tab
 &expandtab = true  # 将 tab 转换成空格
 &autoindent = true  # 换行时继承上一行的缩进
@@ -39,7 +36,7 @@ nnoremap <Leader>r :source $MYVIMRC<CR>
 &softtabstop = 4  # 虚拟 tab 的宽度
 
 # 正常的退格
-&backspace = "indent,eol,start"
+&backspace = 'indent,eol,start'
 
 # 检测文件类型，加载对应插件和缩进规则
 filetype plugin indent on
@@ -52,25 +49,25 @@ nnoremap <Leader>/ :nohlsearch<CR>
 
 syntax on  # 语法高亮
 &termguicolors = true  # 启用真彩色
-silent! colorscheme moonfly  # 配色主题
+colorscheme moonfly  # 配色主题
 
 # 右下角显示正在输入的命令
 &showcmd = true
 
 # 命令可以用 tab 补全
 &wildmenu = true
-&wildmode = "list:longest,full"
+&wildmode = 'list:longest,full'
 
 # 行尾显示常用的不可见字符
 &list = true
-&listchars = "tab:>·,trail:·,extends:>,precedes:<,nbsp:+"
+&listchars = 'tab:>·,trail:·,extends:>,precedes:<,nbsp:+'
 
 # 文件编码
-&encoding = "utf-8"
-&fileencodings = "ucs-bom,utf-8,gbk,gb18030,big5,utf-16,latin1"
+&encoding = 'utf-8'
+&fileencodings = 'ucs-bom,utf-8,gbk,gb18030,big5,utf-16,latin1'
 
 # 自动处理不同系统的换行符
-&fileformats = "unix,dos,mac"
+&fileformats = 'unix,dos,mac'
 
 &hidden = true  # 允许隐藏未保存的 buffer
 &confirm = true  # 没有保存或文件只读时弹出确认
@@ -87,14 +84,14 @@ nnoremap <Leader>. :bnext<CR>
 # 如果目录不存在则创建
 def EnsureDir(path: string): string
   if !isdirectory(path)
-    mkdir(path, "p")
+    mkdir(path, 'p')
   endif
   return path
 enddef
 
 # 持久化撤销
 &undofile = true
-&undodir = EnsureDir($HOME .. "/.vim/undo")
+&undodir = EnsureDir($HOME .. '/.vim/undo')
 
 # 禁用自动备份
 &backup = false
@@ -103,7 +100,7 @@ enddef
 
 # 恢复上次打开时的光标位置
 def RestoreCursor()
-  if line("'\"") > 1 && line("'\"") <= line("$")
+  if line("'\"") > 1 && line("'\"") <= line('$')
     exe "normal! g'\""
   endif
 enddef

@@ -21,8 +21,10 @@ alias vt='vim ~/.tmux.conf'
 # alias vw='vim /mnt/c/Users/USER/.wezterm.lua'
 
 # uv
-eval "$(uv generate-shell-completion bash)"
-eval "$(uvx --generate-shell-completion bash)"
+if command -v uv &> /dev/null; then
+    eval "$(uv generate-shell-completion bash)"
+    eval "$(uvx --generate-shell-completion bash)"
+fi
 
 # yazi
 function y() {
@@ -34,7 +36,9 @@ function y() {
 }
 
 # fzf
-eval "$(fzf --bash)"
+if command -v fzf &> /dev/null; then
+    eval "$(fzf --bash)"
+fi
 
 # ruff
 alias rf='ruff format'
