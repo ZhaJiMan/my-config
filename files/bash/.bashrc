@@ -45,3 +45,10 @@ alias rf='ruff format'
 alias rc='ruff check'
 rfc() { ruff format "$@" && ruff check "$@"; }
 rfcc() { ruff format "$@" && ruff check --fix "$@"; }
+
+# kubectl
+alias k=kubectl
+if command -v kubectl &> /dev/null; then
+    source <(kubectl completion bash)
+    complete -o default -F __start_kubectl k
+fi
