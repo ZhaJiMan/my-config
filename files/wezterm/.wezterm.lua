@@ -22,4 +22,19 @@ config.window_padding = {
   bottom = 0,
 }
 
+config.keys = {
+  -- shift + enter send new line
+  {
+    key = 'Enter',
+    mods = 'SHIFT',
+    action = wezterm.action.SendString('\n'),
+  },
+  -- disable alt + enter
+  {
+    key = 'Enter',
+    mods = "ALT",
+    action = wezterm.action.DisableDefaultAssignment,
+  },
+}
+
 return config
