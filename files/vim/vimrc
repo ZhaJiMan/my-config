@@ -24,7 +24,7 @@ nnoremap <Leader>r :source $MYVIMRC<CR>
 &wrap = false  # 禁用折行
 &scrolloff = 10  # 光标距窗口上下边缘的最小行数
 &ruler = true  # 状态栏显示光标位置
-&colorcolumn = "88"  # 高亮某一列
+&colorcolumn = '88'  # 高亮某一列
 &showmatch = true  # 光标会短暂跳到匹配的括号处
 
 &smarttab = true  # 在行首根据 shiftwidth 插入 tab

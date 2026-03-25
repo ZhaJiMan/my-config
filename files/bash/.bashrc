@@ -5,6 +5,7 @@ fi
 
 # export https_proxy='http://10.24.14.174:1235'
 
+# alias
 alias ll='ls -lha'
 alias src='source ~/.bashrc'
 alias venv='source .venv/bin/activate'
@@ -18,7 +19,7 @@ export EDITOR=vim
 alias vc='vim ~/.vim/vimrc'
 alias vb='vim ~/.bashrc'
 alias vt='vim ~/.tmux.conf'
-# alias vw='vim /mnt/c/Users/USER/.wezterm.lua'
+# alias vw='vim /mnt/c/Users/zhajiman/.wezterm.lua'
 
 # uv
 if command -v uv &> /dev/null; then
