@@ -58,3 +58,12 @@ fi
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# zhipu
+export ZAI_API_KEY=''
+export MY_API_KEY="$ZAI_API_KEY"
+export ZAI_ENABLED_MODULES=search,reader,zread
+
+# oss
+export OSS_ACCESS_KEY_ID=''
+export OSS_ACCESS_KEY_SECRET=''
