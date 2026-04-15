@@ -1,0 +1,27 @@
+{
+    "mcpServers": {
+      "web-search-prime": {
+        "url": "https://open.bigmodel.cn/api/mcp/web_search_prime/mcp",
+        "auth": "bearer",
+        "bearerTokenEnv": "ZAI_API_KEY",
+        "directTools": true
+      },
+      "web-reader": {
+        "url": "https://open.bigmodel.cn/api/mcp/web_reader/mcp",
+        "auth": "bearer",
+        "bearerTokenEnv": "ZAI_API_KEY",
+        "directTools": true
+      },
+      "zread": {
+        "url": "https://open.bigmodel.cn/api/mcp/zread/mcp",
+        "auth": "bearer",
+        "bearerTokenEnv": "ZAI_API_KEY",
+        "directTools": true
+      },
+      "codebase-memory-mcp": {
+        "command": "/home/zhajiman/.local/bin/codebase-memory-mcp",
+        "args": [],
+        "directTools": false
+      }
+    }
+}
