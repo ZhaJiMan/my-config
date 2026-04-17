@@ -3,6 +3,31 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
+# git branch in prompt
+function git_branch {
+branch="`git branch 2>/dev/null | grep "^\*" | sed -e "s/^\*\ //"`"
+    if [ "${branch}" != "" ];then
+        if [ "${branch}" = "(no branch)" ];then
+            branch="(`git rev-parse --short HEAD`...)"
+        fi
+        echo " ($branch)"
+    fi
+}
+
+# 命令提示符的颜色变量
+GREEN='\[\033[01;32m\]'
+BLUE='\[\033[01;34m\]'
+YELLOW='\[\033[01;33m\]'
+RESET='\[\033[00m\]'
+
+# 给 debian 的命令提示符加上 git 分支
+PS1="${debian_chroot:+($debian_chroot)}${GREEN}\u@\h${RESET}:${BLUE}\w${YELLOW}\$(git_branch)${RESET}\$ "
+
+# 覆盖前面的 xterm
+case "$TERM" in
+    xterm*|rxvt*) PS1="\[\e]0;\u@\h: \w\a\]$PS1";;
+esac
+
 # export https_proxy='http://10.24.14.174:1235'
 
 # alias
@@ -67,3 +92,6 @@ export ZAI_ENABLED_MODULES=search,reader,zread
 # oss
 export OSS_ACCESS_KEY_ID=''
 export OSS_ACCESS_KEY_SECRET=''
+
+# line_profiler
+export LINE_PROFILE=1
