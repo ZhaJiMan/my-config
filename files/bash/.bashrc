@@ -6,8 +6,8 @@ fi
 # git branch in prompt
 function git_branch {
 branch="`git branch 2>/dev/null | grep "^\*" | sed -e "s/^\*\ //"`"
-    if [ "${branch}" != "" ];then
-        if [ "${branch}" = "(no branch)" ];then
+    if [ "${branch}" != "" ]; then
+        if [ "${branch}" = "(no branch)" ]; then
             branch="(`git rev-parse --short HEAD`...)"
         fi
         echo " ($branch)"
@@ -28,16 +28,37 @@ case "$TERM" in
     xterm*|rxvt*) PS1="\[\e]0;\u@\h: \w\a\]$PS1";;
 esac
 
+# 自动激活 python 虚拟环境
+function auto_venv {
+    if [[ -n "$VIRTUAL_ENV" && "$VIRTUAL_ENV" -ef "${PWD}/.venv" ]]; then
+        return
+    fi
+    local dir="$PWD"
+    while [[ "$dir" != "/" ]]; do
+        if [[ -f "$dir/.venv/bin/activate" ]]; then
+            source "$dir/.venv/bin/activate"
+            return
+        fi
+        dir=$(dirname "$dir")
+    done
+}
+
+PROMPT_COMMAND="auto_venv${PROMPT_COMMAND:+;$PROMPT_COMMAND}"
+
 # export https_proxy='http://10.24.14.174:1235'
 
 # alias
 alias ll='ls -lha'
 alias src='source ~/.bashrc'
-alias venv='source .venv/bin/activate'
 alias ssha='eval "$(ssh-agent -s)"'
+
+# windows
+# alias exp='/mnt/c/Windows/explorer.exe'
+
+# python
 alias ipy='ipython'
 alias pyt='python -m unittest'
-# alias exp='/mnt/c/Windows/explorer.exe'
+alias venv='source .venv/bin/activate'
 
 # vim
 export EDITOR=vim
@@ -72,6 +93,9 @@ alias rc='ruff check'
 rfc() { ruff format "$@" && ruff check "$@"; }
 rfcc() { ruff format "$@" && ruff check --fix "$@"; }
 
+# line_profiler
+export LINE_PROFILE=1
+
 # kubectl
 alias k=kubectl
 if command -v kubectl &> /dev/null; then
@@ -79,19 +103,21 @@ if command -v kubectl &> /dev/null; then
     complete -o default -F __start_kubectl k
 fi
 
+# oss
+export OSS_ACCESS_KEY_ID=''
+export OSS_ACCESS_KEY_SECRET=''
+
 # nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+# pi
+alias pin='pi --no-session'
+alias pic='pi -c'
+alias pir='pi -r'
+
 # zhipu
 export ZAI_API_KEY=''
 export MY_API_KEY="$ZAI_API_KEY"
 export ZAI_ENABLED_MODULES=search,reader,zread
-
-# oss
-export OSS_ACCESS_KEY_ID=''
-export OSS_ACCESS_KEY_SECRET=''
-
-# line_profiler
-export LINE_PROFILE=1
