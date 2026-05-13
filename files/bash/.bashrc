@@ -33,6 +33,7 @@ function auto_venv {
     if [[ -n "$VIRTUAL_ENV" && "$VIRTUAL_ENV" -ef "${PWD}/.venv" ]]; then
         return
     fi
+
     local dir="$PWD"
     while [[ "$dir" != "/" ]]; do
         if [[ -f "$dir/.venv/bin/activate" ]]; then
@@ -41,6 +42,10 @@ function auto_venv {
         fi
         dir=$(dirname "$dir")
     done
+
+    if [[ -n "$VIRTUAL_ENV" ]]; then
+        deactivate
+    fi
 }
 
 PROMPT_COMMAND="auto_venv${PROMPT_COMMAND:+;$PROMPT_COMMAND}"
