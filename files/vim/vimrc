@@ -9,6 +9,8 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'yegappan/lsp'
+Plug 'https://codeberg.org/ziglang/zig.vim'
 
 plug#end()
 
@@ -98,29 +100,13 @@ enddef
 &writebackup = false
 &swapfile = false
 
-# 恢复上次打开时的光标位置
-def RestoreCursor()
-  if line("'\"") > 1 && line("'\"") <= line('$')
-    exe "normal! g'\""
-  endif
-enddef
-
-# TODO: TrimeWhiteSpaces
-
-augroup vimrc
-  autocmd!
-  autocmd BufReadPost * RestoreCursor()
-augroup END
-
+# 编辑快捷键
+nnoremap <Leader>e :e<CR>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>Q :q!<CR>
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>x :x<CR>
 nnoremap <Leader>d :bdelete<CR>
-
-# fzf
-nnoremap <Leader>f :Files<CR>
-nnoremap <Leader>b :Buffers<CR>
 
 # 分屏
 &splitright = true
@@ -141,6 +127,55 @@ nnoremap <Leader>K <C-w>K
 
 # netrw
 g:netrw_liststyle = 3
-nnoremap <Leader>e :Lex 35<CR>
+# nnoremap <Leader>e :Lex 35<CR>
 
-# TODO: LSP
+# fzf
+nnoremap <Leader>f :Files<CR>
+nnoremap <Leader>b :Buffers<CR>
+
+# 恢复上次打开时的光标位置
+def RestoreCursor()
+  if line("'\"") > 1 && line("'\"") <= line('$')
+    exe "normal! g'\""
+  endif
+enddef
+
+# TODO: TrimeWhiteSpaces
+
+# lsp
+g:lspOpts = {
+  ignoreMissingServer: true,
+  autoHighlightDiags: true,
+  popupBorder: true,
+}
+
+g:lspServers = [
+  {
+    name: 'basedpyright',
+    filetype: 'python',
+    path: '~/.local/bin/basedpyright-langserver',
+    args: ['--stdio'],
+    rootSearch: ['pyproject.toml', 'pyrightconfig.json'],
+  },
+  {
+    name: 'zls',
+    filetype: ['zig', 'zir'],
+    path: '~/.local/bin/zls',
+    rootSearch: ["build.zig", "zls.json"],
+  },
+]
+
+def LspKeymaps()
+  nnoremap <buffer> <silent> gd  <cmd>LspGotoDefinition<cr>
+  nnoremap <buffer> <silent> K <cmd>LspHover<cr>
+  nnoremap <buffer> <silent> ]d <cmd>LspDiag next<cr>
+  nnoremap <buffer> <silent> [d <cmd>LspDiag prev<cr>
+enddef
+
+augroup vimrc
+  autocmd!
+  autocmd BufReadPost * RestoreCursor()
+  autocmd User LspSetup g:LspOptionsSet(g:lspOpts)
+  autocmd User LspSetup g:LspAddServer(g:lspServers)
+  autocmd User LspAttached LspKeymaps()
+augroup END
