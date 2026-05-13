@@ -9,7 +9,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'yegappan/lsp'
+Plug 'ZhaJiMan/lsp', { 'branch': 'custom' }
 Plug 'https://codeberg.org/ziglang/zig.vim'
 
 plug#end()
@@ -145,6 +145,7 @@ enddef
 # lsp
 g:lspOpts = {
   ignoreMissingServer: true,
+  completionMatcher: 'icase',
   autoHighlightDiags: true,
   popupBorder: true,
 }
