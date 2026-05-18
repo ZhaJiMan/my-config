@@ -72,11 +72,23 @@ alias vb='vim ~/.bashrc'
 alias vt='vim ~/.tmux.conf'
 # alias vw='vim /mnt/c/Users/zhajiman/.wezterm.lua'
 
+# mise
+eval "$(/home/zhajiman/.local/bin/mise activate bash)"
+
 # uv
 if command -v uv &> /dev/null; then
     eval "$(uv generate-shell-completion bash)"
     eval "$(uvx --generate-shell-completion bash)"
 fi
+
+# ruff
+alias rf='ruff format'
+alias rc='ruff check'
+rfc() { ruff format "$@" && ruff check "$@"; }
+rfcc() { ruff format "$@" && ruff check --fix "$@"; }
+
+# line_profiler
+export LINE_PROFILE=1
 
 # yazi
 function y() {
@@ -92,15 +104,6 @@ if command -v fzf &> /dev/null; then
     eval "$(fzf --bash)"
 fi
 
-# ruff
-alias rf='ruff format'
-alias rc='ruff check'
-rfc() { ruff format "$@" && ruff check "$@"; }
-rfcc() { ruff format "$@" && ruff check --fix "$@"; }
-
-# line_profiler
-export LINE_PROFILE=1
-
 # kubectl
 alias k=kubectl
 if command -v kubectl &> /dev/null; then
@@ -111,11 +114,6 @@ fi
 # oss
 export OSS_ACCESS_KEY_ID=''
 export OSS_ACCESS_KEY_SECRET=''
-
-# nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # pi
 alias pin='pi --no-session'

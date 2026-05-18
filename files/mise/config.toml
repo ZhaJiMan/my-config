@@ -1,0 +1,10 @@
+[tools]
+bat = "latest"
+fzf = "latest"
+node = "latest"  # 需要安装 gcc 套件
+tmux = "latest"
+usage = "latest"
+uv = "latest"
+yazi = "latest"
+zig = "0.16.0"
+zls = "0.16.0"

@@ -154,14 +154,14 @@ g:lspServers = [
   {
     name: 'basedpyright',
     filetype: 'python',
-    path: '~/.local/bin/basedpyright-langserver',
+    path: '~/.local/share/mise/installs/node/26/bin/basedpyright-langserver',
     args: ['--stdio'],
     rootSearch: ['pyproject.toml', 'pyrightconfig.json'],
   },
   {
     name: 'zls',
     filetype: ['zig', 'zir'],
-    path: '~/.local/bin/zls',
+    path: '~/.local/share/mise/installs/zls/0.16.0/zls',
     rootSearch: ["build.zig", "zls.json"],
   },
 ]
