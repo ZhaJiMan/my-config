@@ -72,6 +72,7 @@ export EDITOR=vim
 alias vc='vim ~/.vim/vimrc'
 alias vb='vim ~/.bashrc'
 alias vt='vim ~/.tmux.conf'
+alias vm='vim ~/.config/mise/config.toml'
 # alias vw='vim /mnt/c/Users/zhajiman/.wezterm.lua'
 
 # mise
