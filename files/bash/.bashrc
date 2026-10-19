@@ -1,9 +1,13 @@
 # 添加用户安装的软件
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
+# 避免后面的 command 命令失效
+if [ -d "$HOME/.local/bin" ]; then
+    case ":$PATH:" in
+        *":$HOME/.local/bin:"*) ;;
+        *) export PATH="$HOME/.local/bin:$PATH" ;;
+    esac
 fi
 
-# git branch in prompt
+# 返回 git 分支的函数
 function git_branch {
 branch="`git branch 2>/dev/null | grep "^\*" | sed -e "s/^\*\ //"`"
     if [ "${branch}" != "" ]; then
