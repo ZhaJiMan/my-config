@@ -50,8 +50,6 @@ function auto_venv {
 
 PROMPT_COMMAND="auto_venv${PROMPT_COMMAND:+;$PROMPT_COMMAND}"
 
-# export https_proxy='http://10.24.14.174:1235'
-
 # alias
 alias ll='ls -lha'
 alias src='source ~/.bashrc'
@@ -65,6 +63,10 @@ alias ipy='ipython'
 alias pyt='python -m unittest'
 alias venv='source .venv/bin/activate'
 
+# go
+alias gf='go fmt'
+alias gr='go run'
+
 # vim
 export EDITOR=vim
 alias vc='vim ~/.vim/vimrc'
@@ -73,7 +75,9 @@ alias vt='vim ~/.tmux.conf'
 # alias vw='vim /mnt/c/Users/zhajiman/.wezterm.lua'
 
 # mise
-eval "$(/home/zhajiman/.local/bin/mise activate bash)"
+if command -v mise &> /dev/null; then
+    eval "$(mise activate bash)"
+fi
 
 # uv
 if command -v uv &> /dev/null; then
@@ -111,16 +115,10 @@ if command -v kubectl &> /dev/null; then
     complete -o default -F __start_kubectl k
 fi
 
-# oss
-export OSS_ACCESS_KEY_ID=''
-export OSS_ACCESS_KEY_SECRET=''
-
 # pi
 alias pin='pi --no-session'
 alias pic='pi -c'
 alias pir='pi -r'
 
-# zhipu
-export ZAI_API_KEY=''
-export MY_API_KEY="$ZAI_API_KEY"
-export ZAI_ENABLED_MODULES=search,reader,zread
+# secrets
+[ -f ~/.secrets ] && source ~/.secrets
